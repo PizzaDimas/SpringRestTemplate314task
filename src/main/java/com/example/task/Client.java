@@ -3,15 +3,12 @@ package com.example.task;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Client {
 
@@ -22,9 +19,8 @@ public class Client {
     private static StringBuilder result = new StringBuilder();
 
 
-
     public static void main(String[] args) {
-        get();
+        getUsers();
         postUser();
         putUser();
         delete();
@@ -55,7 +51,6 @@ public class Client {
     }
 
 
-
     private static void putUser() {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -65,7 +60,7 @@ public class Client {
         user.setId(3L);
         user.setName("Thomas");
         user.setLastName("Shelby");
-        user.setAge((byte)19);
+        user.setAge((byte) 19);
 
         HttpEntity<User> requestEntity = new HttpEntity<>(user, headers);
 
@@ -87,7 +82,7 @@ public class Client {
         user.setId(3L);
         user.setName("Thomas");
         user.setLastName("Shelby");
-        user.setAge((byte)19);
+        user.setAge((byte) 19);
         HttpEntity<User> requestEntity = new HttpEntity<>(user, headers);
 
         ResponseEntity<String> responseEntity = restTemplate.exchange(url + "/3", HttpMethod.DELETE, requestEntity, String.class);
@@ -99,10 +94,10 @@ public class Client {
         result.append(responseBody);
         System.out.println(sessionId);
 
-        System.out.println(result);
+        System.out.println(" RESULT CODE -> " + result + " <- RESULT CODE");
     }
 
-    private static void get(){
+    private static void getUsers() {
 
         ResponseEntity<String> responseEntity = restTemplate.getForEntity(url, String.class);
         HttpStatusCode statusCode = responseEntity.getStatusCode();
